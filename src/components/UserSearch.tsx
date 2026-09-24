@@ -22,7 +22,7 @@ const UserSearch = () => {
     enabled: !!submittedUsername,
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmittedUsername(username.trim());
   };
@@ -45,19 +45,19 @@ const UserSearch = () => {
       {data && (
         <div className="user-card">
           <img src={data.avatar_url} alt={data.name} className="avatar" />
+          <h2>{data.name || data.login}</h2>
+          <p className="bio">{data.bio}</p>
+          <a
+            href={data.html_url}
+            className="profile-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithubAlt />
+            View GitHub Profile
+          </a>
         </div>
       )}
-      <h2>{data.name || data.login}</h2>
-      <p className="bio">{data.bio}</p>
-      <a
-        href={data.html_url}
-        className="profile-btn"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <FaGithubAlt />
-        View GitHub Profile
-      </a>
     </>
   );
 };
